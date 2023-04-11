@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <html>
  <head>
     <!-- Required meta tags -->
@@ -11,15 +12,27 @@
     <title>Cadastro De Usuario</title>
   </head>
 <body>
+	<%
+		String nome = request.getParameter("nome");
+		if(nome == null){
+			nome = "";
+		}
+		String email = request.getParameter("email");
+		if(email == null){
+			email = "";
+		}
+	%>
+	
+
 	<div class="container-fluid">
   <form method = "post" action = "cadastroUsuario">
 	 	<h1>cadasto de usario</h1>
 	 	
 	 	<label type for="nome">Nome:</label>
-	 	<input type="text" name="nome" id="nome">
+	 	<input type="text" name="nome" id="nome" value="<% out.println(nome); %>">
 	 	
         <label for="email">E-mail:</label>
-        <input type="text" name="email" id="email">
+        <input type="text" name="email" id="email" value="<%=email %>">
         </br></br>
         
         <label for="senha1">Senha:</label>
@@ -34,5 +47,15 @@
         <a class="btn btn-primary" href="index.html" role="button">Voltar</a>
     </form>
 </div>
+	<%
+		String senha1 = request.getParameter("senha1");
+		String senha2 = request.getParameter("senha2");
+		if(senha1 != senha2){  
+			<div class="alert alert-danger" role="alert">
+			</div>
+			
+		}
+	%>
 </body>
+	
 </html>
