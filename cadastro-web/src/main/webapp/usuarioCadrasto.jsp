@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
  <head>
     <!-- Required meta tags -->
@@ -47,15 +48,13 @@
         <a class="btn btn-primary" href="index.html" role="button">Voltar</a>
     </form>
 </div>
-	<%
-		String senha1 = request.getParameter("senha1");
-		String senha2 = request.getParameter("senha2");
-		if(senha1 != senha2){  
+	<c:if test="${not empty param.nome }">
+	<hr>
 			<div class="alert alert-danger" role="alert">
+			${param.nome}<span>, as senhas ou as informaçoes nao sao iguais</span>
 			</div>
-			
-		}
-	%>
+	</c:if>
+
 </body>
 	
 </html>
