@@ -14,47 +14,46 @@ import br.edu.ifgoiano.entidade.Usuario;
 
 @WebServlet("/cadastroUsuario")
 public class CadastroUsuarioServlet extends HttpServlet {
-	//simulando bd
+	// simulando bd
 	private List<Usuario> lstDeUsuario;
-	
+
 	@Override
 	public void init() throws ServletException {
-		this.lstDeUsuario =  new ArrayList <Usuario>();
+		this.lstDeUsuario = new ArrayList<Usuario>();
 	}
-	
-	 
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String senha1 = req.getParameter("senha1");
 		String senha2 = req.getParameter("senha2");
 
-		//Verificar senhas
-		if(senha1.equals(senha2)) {
+		// Verificar senhas
+		if (senha1.equals(senha2)) {
 			Usuario usu = new Usuario();
 			usu.setNome(req.getParameter("nome"));
 			usu.setEmail(req.getParameter("email"));
 			usu.setSenha(senha1);
-			
+
 			lstDeUsuario.add(usu);
-			//Redirecionar senhas 
+			// Redirecionar senhas
 			resp.sendRedirect("index.html");
-		}else {
-			//Redirecionar o usuario para a mesma pagina de cadrasto do usuario
+		} else {
+			// Redirecionar o usuario para a mesma pagina de cadrasto do usuario
 			req.getRequestDispatcher("usuarioCadrasto.jsp").forward(req, resp);
 		}
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		for (Usuario usuario : lstDeUsuario) {
-			System.out.println(usuario.getNome().concat(" _ ").concat(usuario.getEmail()));
-			}
-		}
-	
+
+		req.setAttribute("usuarios", lstDeUsuario);
+		req.getRequestDispatcher("usuarioListar.jsp").forward(req, resp);
+
+	}
+
 	@Override
 	public void destroy() {
 		this.lstDeUsuario.clear();
-	  	}
-	
+	}
+
 }
