@@ -9,16 +9,29 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="container">
 <h1>Lista de Usuarios</h1>
-<table border=1>
-	<c:forEach var ="usuario" items= "${usuarios}" varStatus="id">
-		<tr>
-			<td> ${usuario.id}</td>
-			 <td>${usuario.nome}</td> 
-			 <td>${usuario.email}</td>
+
+<table border = "1" class="table">
+<thead>
+	<tr>
+		<th>ID</th>
+		<th>Nome</th>
+		<th>Email</th>
+	</tr>
+</thead>
+<tbody>
+	<c:forEach var = "usuario" items = "${usuarios}" varStatus = "id">
+		<tr class="${id.count % 2 == 0 ? 'table-primary' :  'table-secondary'}">
+			<td>${usuario.id}</td>
+			<td>${usuario.nome}</td>
+			<td><a href="mailto:${usuario.email}">${usuario.email}</a></td>
 		</tr>
 	</c:forEach>
+</tbody>
 </table>
- <a class="btn btn-primary" href="index.html" role="button">Voltar</a>
+
+<a href="usuarioCadastro.jsp" class="btn btn-primary">Clique aqui para se cadastrar!</a>
+</div>
 </body>
 </html>
