@@ -31,7 +31,7 @@
 </tbody>
 </table>
 
-<a href="usuarioCadastro.jsp" class="btn btn-primary">Clique aqui para se cadastrar!</a>
+<a href="usuarioCadrasto.jsp" class="btn btn-primary">Clique aqui para se cadastrar!</a>
 </div>
 </body>
 </html>
