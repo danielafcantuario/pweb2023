@@ -15,16 +15,9 @@ import br.edu.ifgoiano.repositorio.UsuarioRepositorio;
 
 @WebServlet("/cadastroUsuario")
 public class CadastroUsuarioServlet extends HttpServlet {
-	// simulando bd
-	private List<Usuario> lstDeUsuario;
-
+	
 	@Override
-	public void init() throws ServletException {
-		this.lstDeUsuario = new ArrayList<Usuario>();
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String senha1 = req.getParameter("senha1");
 		String senha2 = req.getParameter("senha2");
 
@@ -36,8 +29,8 @@ public class CadastroUsuarioServlet extends HttpServlet {
 			usu.setSenha(senha1);
 			
 			UsuarioRepositorio repositorio = new UsuarioRepositorio();
+			repositorio.inserirUsuario(usu);
 			
-			lstDeUsuario.add(usu);
 			// Redirecionar senhas
 			resp.sendRedirect("index.html");
 		} else {
@@ -47,17 +40,12 @@ public class CadastroUsuarioServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		UsuarioRepositorio repositorio = new UsuarioRepositorio();
 		req.setAttribute("usuarios", repositorio.ListarUsuarios());
-		req.getRequestDispatcher("usuarioListar.jsp").forward(req, resp);
-
-	}
-
-	@Override
-	public void destroy() {
-		this.lstDeUsuario.clear();
+		req.getRequestDispatcher("usuarioListagem.jsp").forward(req, resp);
+		
 	}
 
 }
