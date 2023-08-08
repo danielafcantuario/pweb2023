@@ -26,7 +26,7 @@
 			<label for="senha2">Senha confirmada:</label>
 			<input type="password" name="senha2"><br><br>
 			<input type="submit" value="Salvar" class="btn btn-primary">
-			<a class="btn btn-secondary" href="cadastroUsuario" role="button">Listar Usuários</a>
+			<a class="btn btn-secondary" href="cadastrarUsuario" role="button">Listar Usuários</a>
 			<a class="btn btn-secondary" href="index.html" role="button">Voltar</a>
 		</form>
 		<c:if test="${not empty param.nome}">

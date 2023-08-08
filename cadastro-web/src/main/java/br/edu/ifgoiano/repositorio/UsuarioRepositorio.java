@@ -18,11 +18,10 @@ public class UsuarioRepositorio {
 				getConnection("jdbc:h2:~/usuariodb", "sa", "sa");
 	}
 	
-	public static Connection conn;
 	public List<Usuario> ListarUsuarios(){
 		List<Usuario> lstUsuarios = new ArrayList<Usuario>();
 		
-		String sql = "select id, nome,  email, senha, data_nacimento from usuario";
+		String sql = "select id, nome,  email, senha, data_nascimento from usuario";
 	try ( Connection conn = this.getConnection();
 			PreparedStatement pst = conn.prepareStatement(sql);){
 		
@@ -31,31 +30,34 @@ public class UsuarioRepositorio {
 			while (resultSet.next()) {
 				Usuario usuario = new Usuario();
 				usuario.setId(resultSet.getInt("id"));
-				usuario.setNome(resultSet.getString("nome"));
-				usuario.setSenha(resultSet.getString("senha"));
-				usuario.setEmail(resultSet.getString("email"));
+				usuario.setNome(resultSet.getString("Nome"));
+				usuario.setSenha(resultSet.getString("Senha"));
+				usuario.setEmail(resultSet.getString("Email"));
 				usuario.setDataNascimento(resultSet.getDate("data_nascimento"));
 				
 				lstUsuarios.add(usuario);
 			}
-		} catch (Exception e) {
+		} catch (Exception ex) {
 			System.out.println("erro na consulta");
-			e.printStackTrace();
+			ex.printStackTrace();
 		}
 			return lstUsuarios;
 	}
 	
-	public void inserirUsuario(Usuario usu) {
-		// TODO Auto-generated method stub
-		 //criar a sql de insert 
+	public void inserirUsuario(Usuario usuario) {
+		
 		 StringBuilder sql = new StringBuilder();
-				 sql.append("insert into usuario");
-				 sql.append("nome, emal, senha)");
+				 sql.append("insert into usuario ");
+				 sql.append("(Nome, Email, Senha) ");
 				 sql.append("values(?,?,?)");
-		 //abrir uma conexao 
-				try(Connection conn = this.getConnection();
-				PreparedStatement pst = conn.prepareStatement(sql.toString());
-				) {
+		  
+				try(Connection conn = this.getConnection();		
+				PreparedStatement pst = conn.prepareStatement(sql.toString());){
+					
+				pst.setString(1, usuario.getNome());
+				pst.setString(2, usuario.getEmail());
+				pst.setString(3, usuario.getSenha());
+				 
 				pst.execute();	
 				
 				conn.commit();		 
@@ -63,10 +65,6 @@ public class UsuarioRepositorio {
 				System.out.println("erro na inclusao de usuario");
 				e.printStackTrace();
 				}
-		 
-		 //preparar a sql para ser executada
-		 
-		 //executar
-	}
-
+		}
+	
 }

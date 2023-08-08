@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.edu.ifgoiano.entidade.Usuario;
 import br.edu.ifgoiano.repositorio.UsuarioRepositorio;
 
-@WebServlet("/cadastroUsuario")
+@WebServlet("/cadastrarUsuario")
 public class CadastroUsuarioServlet extends HttpServlet {
 	
 	@Override
@@ -23,13 +23,13 @@ public class CadastroUsuarioServlet extends HttpServlet {
 
 		// Verificar senhas
 		if (senha1.equals(senha2)) {
-			Usuario usu = new Usuario();
-			usu.setNome(req.getParameter("nome"));
-			usu.setEmail(req.getParameter("email"));
-			usu.setSenha(senha1);
+			Usuario usuario = new Usuario();
+			usuario.setNome(req.getParameter("nome"));
+			usuario.setEmail(req.getParameter("email"));
+			usuario.setSenha(senha1);
 			
 			UsuarioRepositorio repositorio = new UsuarioRepositorio();
-			repositorio.inserirUsuario(usu);
+			repositorio.inserirUsuario(usuario);
 			
 			// Redirecionar senhas
 			resp.sendRedirect("index.html");
