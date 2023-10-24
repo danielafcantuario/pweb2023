@@ -2,7 +2,7 @@
 	"id":"null",
 	"nome":"daniela",
 	"email": "daniela@gmail",
-	"cmr":343434,
+	"cmr":95495,
 	"especialidade":"ORTOPEDIA",
 	"endereco": {
 		"id":null,
@@ -11,6 +11,7 @@
 		"complemento":"quadra 3 lote 17",
 		"cep":"74487442",
 		"cidade":"Goiania",
-		"estado":"Goias"
+		"estado":"Goias",
+		
 	}
 }
